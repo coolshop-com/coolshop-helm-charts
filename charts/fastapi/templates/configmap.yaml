@@ -7,4 +7,6 @@ metadata:
     {{- include "fastapi-helm-chart.labels" . | nindent 4 }}
 data:
   {{- include "fastapi-helm-chart.monitoring-config" . | nindent 2 }}
+  {{- if .Values.configmap }}
   {{- toYaml .Values.configmap | nindent 2 }}
+  {{- end }}
