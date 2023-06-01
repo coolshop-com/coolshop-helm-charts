@@ -17,6 +17,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+configmap: {}
+
+secrets: {}
+
 webDeployment:
   enabled: true
   replicaCount: 2  # Everything is default to 2 for basic HA
@@ -41,13 +45,14 @@ service:
 ingress:
   enabled: true
   className: "haproxy-public"
+  haproxyL5dDstOverride: true
   annotations: {}
     # kubernetes.io/tls-acme: "true"
   hosts: []
     # - host: chart-example.local
     #   paths:
     #     - path: /
-    #       pathType: ImplementationSpecific
+    #       pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

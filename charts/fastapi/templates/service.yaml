@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "fastapi-helm-chart.fullname" . }}
+  namespace: {{ .Release.Namespace | default .Values.namespace }}
   labels:
     {{- include "fastapi-helm-chart.labels" . | nindent 4 }}
 spec:

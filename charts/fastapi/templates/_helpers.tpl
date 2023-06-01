@@ -65,3 +65,10 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "fastapi-helm-chart.l5d-dst-override" -}}
+{{- if .Values.ingress.haproxyL5dDstOverride }}
+{{- $svcPort := .Values.service.port -}}
+haproxy.org/request-set-header: l5d-dst-override {{ include "fastapi-helm-chart.fullname" . }}.{{ .Release.Namespace | default .Values.namespace }}.svc.cluster.local:{{ $svcPort }}
+{{- end }}
+{{- end }}

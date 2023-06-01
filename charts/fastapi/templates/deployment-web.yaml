@@ -2,7 +2,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fastapi-helm-chart.fullname" . }}
+  name: {{ include "fastapi-helm-chart.fullname" . }}-web
+  namespace: {{ .Release.Namespace | default .Values.namespace }}
   labels:
     {{- include "fastapi-helm-chart.labels" . | nindent 4 }}
 spec:
@@ -28,6 +29,14 @@ spec:
             {{- toYaml .Values.webDeployment.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.webDeployment.command }}
+          command: {{ .Values.webDeployment.command }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "fastapi-helm-chart.fullname" . }}
+            - secretRef:
+                name: {{ include "fastapi-helm-chart.fullname" . }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
