@@ -74,11 +74,11 @@ haproxy.org/request-set-header: l5d-dst-override {{ include "fastapi-helm-chart.
 {{- end }}
 
 {{- define "fastapi-helm-chart.monitoring-config" -}}
-ELASTIC_APM_SERVICE_NAME: {{ include "fastapi-helm-chart.fullname" . }}
-ELASTIC_APM_SERVER_URL: http://apm-server-service.elastic.svc.cluster.local:8200
-ELASTIC_APM_ENVIRONMENT: {{ .Release.Namespace | default .Values.namespace }}
-ELASTIC_APM_CLOUD_PROVIDER: gcp
-ELASTIC_APM_CENTRAL_CONFIG: false
-ELASTIC_APM_SERVER_TIMEOUT: 10s
-SENTRY_ENVIRONMENT: {{ .Release.Namespace | default .Values.namespace }}
+ELASTIC_APM_SERVICE_NAME: "{{ include "fastapi-helm-chart.fullname" . }}"
+ELASTIC_APM_SERVER_URL: "http://apm-server-service.elastic.svc.cluster.local:8200"
+ELASTIC_APM_ENVIRONMENT: "{{ .Release.Namespace | default .Values.namespace }}"
+ELASTIC_APM_CLOUD_PROVIDER: "gcp"
+ELASTIC_APM_CENTRAL_CONFIG: "false"
+ELASTIC_APM_SERVER_TIMEOUT: "10s"
+SENTRY_ENVIRONMENT: "{{ .Release.Namespace | default .Values.namespace }}"
 {{- end }}
