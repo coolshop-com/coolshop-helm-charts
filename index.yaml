@@ -3,6 +3,21 @@ entries:
   fastapi:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-06-02T12:25:19.145315689Z"
+    description: A simple Coolshop Helm chart for deploying FastAPI applications in
+      Kubernetes
+    digest: edac95416e2f63696c54e17ee84d8377c033f30d6cb152fd2c5d5eaffcbaad7f
+    icon: https://static.coolshop-cdn.com/images/favicons/coolshop/favicon-256.png
+    maintainers:
+    - email: it@coolshop.com
+      name: Coolshop
+    name: fastapi
+    type: application
+    urls:
+    - https://github.com/coolshop-com/coolshop-helm-charts/releases/download/fastapi-1.0.6/fastapi-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-06-02T08:21:32.439074371Z"
     description: A simple Coolshop Helm chart for deploying FastAPI applications in
       Kubernetes
@@ -91,4 +106,4 @@ entries:
     urls:
     - https://github.com/coolshop-com/coolshop-helm-charts/releases/download/fastapi-1.0.0/fastapi-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-02T08:21:32.43919948Z"
+generated: "2023-06-02T12:25:19.145513691Z"
