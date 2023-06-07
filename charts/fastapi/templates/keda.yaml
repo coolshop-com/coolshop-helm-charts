@@ -1,0 +1,18 @@
+{{- if .Values.webDeployment.keda.enabled }}
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "fastapi-helm-chart.fullname" . }}-web
+  namespace: {{ .Release.Namespace | default .Values.namespace }}
+  labels:
+    {{- include "fastapi-helm-chart.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    deploymentName: {{ include "fastapi-helm-chart.fullname" . }}-web
+  minReplicaCount: {{ .Values.webDeployment.keda.minReplicas }}
+  maxReplicaCount: {{ .Values.webDeployment.keda.maxReplicas }}
+  triggers:
+{{- with .Values.webDeployment.keda.triggers }}
+{{ toYaml . | indent 4 }}
+{{ end }}
+{{- end }}

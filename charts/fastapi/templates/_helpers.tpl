@@ -82,3 +82,10 @@ ELASTIC_APM_CENTRAL_CONFIG: "false"
 ELASTIC_APM_SERVER_TIMEOUT: "10s"
 SENTRY_ENVIRONMENT: "{{ .Release.Namespace | default .Values.namespace }}"
 {{- end }}
+
+{{- define "fastapi-helm-chart.defaultPodAnnotations" -}}
+co.elastic.logs/json.keys_under_root: "true"
+co.elastic.logs/json.overwrite_keys: "true"
+co.elastic.logs/json.add_error_key: "true"
+co.elastic.logs/json.expand_keys: "true"
+{{- end }}

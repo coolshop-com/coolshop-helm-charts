@@ -17,7 +17,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-configmap: {}
+# configmap: {}
 
 secrets: {}
 
@@ -36,6 +36,23 @@ webDeployment:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
+  keda:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 6
+    triggers: []
+    # - type: prometheus
+    #   metadata:
+    #     serverAddress: http://10.132.0.82:9090
+    #     metricName: haproxy_frontend_current_sessions
+    #     threshold: "100"
+    #     query: sum(rate(haproxy_frontend_current_sessions{proxy="http"}[2m]))
+
+  podDisruptionBudget:
+    enabled: false
+    # maxUnavailable: 1
+    # minAvailable: 1
 
 service:
   enabled: true
@@ -57,3 +74,8 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+lifecycle:
+  preStop:
+    exec:
+      command: ["/bin/sh", "-c", "sleep 10"]
