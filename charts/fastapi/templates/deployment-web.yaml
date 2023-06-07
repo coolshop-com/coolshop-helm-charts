@@ -13,6 +13,10 @@ spec:
   selector:
     matchLabels:
       {{- include "fastapi-helm-chart.webSelectorLabels" . | nindent 6 }}
+  {{- with .Values.webDeployment.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       annotations:
@@ -24,6 +28,7 @@ spec:
         {{- include "fastapi-helm-chart.webSelectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "fastapi-helm-chart.serviceAccountName" . }}
+      terminationGracePeriodSeconds: {{ .Values.webDeployment.terminationGracePeriodSeconds }}
       securityContext:
         {{- toYaml .Values.webDeployment.podSecurityContext | nindent 8 }}
       containers:
