@@ -80,7 +80,13 @@ ELASTIC_APM_ENVIRONMENT: "{{ .Release.Namespace | default .Values.namespace }}"
 ELASTIC_APM_CLOUD_PROVIDER: "gcp"
 ELASTIC_APM_CENTRAL_CONFIG: "false"
 ELASTIC_APM_SERVER_TIMEOUT: "10s"
+{{- if or .Values.image.tag .Chart.AppVersion }}
+ELASTIC_APM_SERVICE_VERSION: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
+{{- end }}
 SENTRY_ENVIRONMENT: "{{ .Release.Namespace | default .Values.namespace }}"
+{{- if or .Values.image.tag .Chart.AppVersion }}
+SENTRY_RELEASE: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
+{{- end }}
 {{- end }}
 
 {{- define "fastapi-helm-chart.defaultPodAnnotations" -}}

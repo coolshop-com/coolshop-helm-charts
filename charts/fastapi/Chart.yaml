@@ -2,7 +2,7 @@ apiVersion: v2
 name: fastapi
 description: A simple Coolshop Helm chart for deploying FastAPI applications in Kubernetes
 type: application
-version: 1.1.3
+version: 1.1.4
 appVersion: latest
 icon: https://static.coolshop-cdn.com/images/favicons/coolshop/favicon-256.png
 maintainers:

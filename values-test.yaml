@@ -1,0 +1,5 @@
+configmap:
+  MINTEST: 1
+
+secrets:
+  MINSECRET: ossipoff
