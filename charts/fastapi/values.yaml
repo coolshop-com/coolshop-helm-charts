@@ -64,6 +64,9 @@ service:
   type: ClusterIP
   port: 8000
 
+serviceMonitor:
+  enabled: false
+
 ingress:
   enabled: true
   className: "haproxy-public"
