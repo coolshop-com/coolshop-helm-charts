@@ -33,9 +33,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["alembic"]
           args: ["-c", "/home/app/alembic/alembic.ini", "upgrade", "head"]
-          envFrom:
-            - configMapRef:
-                name: {{ include "fastapi-helm-chart.fullname" . }}
-            - secretRef:
-                name: {{ include "fastapi-helm-chart.fullname" . }}
+          env:
+            - name: POSTGRES_HOST
+              value: {{ .Values.configmap.POSTGRES_HOST | quote}}
+            - name: POSTGRES_USER
+              value: {{ .Values.configmap.POSTGRES_USER | quote}}
+            - name: POSTGRES_PORT
+              value: {{ .Values.configmap.POSTGRES_PORT | quote}}
+            - name: POSTGRES_DB
+              value: {{ .Values.configmap.POSTGRES_DB | quote}}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.secrets.POSTGRES_PASSWORD | quote}}
 {{- end }}
